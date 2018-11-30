@@ -31,8 +31,6 @@ class Page extends React.Component {
   }
 
   getPlaylists = () => {
-    console.log("get playlist firing");
-
     const fetchOptions = {
       method: "GET",
       headers: {
@@ -48,7 +46,6 @@ class Page extends React.Component {
   };
 
   getUser = access_token => {
-    console.log(access_token);
     if (access_token) {
       getCurrentUser(access_token).then(user =>
         this.setState({ user, loading: false })

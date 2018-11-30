@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Link from "next/link";
 import Track from "../components/track";
 import { searchByTerm } from "../iTunesHelper";
 
@@ -52,6 +53,9 @@ class Playlist extends Component {
               <source src={result.previewUrl} type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
+            <Link href={result.trackViewUrl}>
+              <a>Buy on iTunes {result.trackPrice}</a>
+            </Link>
           </div>
         );
       });
