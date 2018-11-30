@@ -1,0 +1,11 @@
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 20px;
+}
+
+.results-item {
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
