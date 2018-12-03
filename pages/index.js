@@ -10,22 +10,22 @@ class Page extends React.Component {
   state = {
     access_token: false,
     loading: true,
+    loginUrl: "",
     playlists: null,
     user: null
   };
 
-  static async getInitialProps() {
-    const loginUrl = getSpotifyLoginURL();
-    return { loginUrl };
-  }
-
   componentDidMount() {
-    const access_token = getHashParam("access_token");
-    this.setState({ access_token });
+    getSpotifyLoginURL()
+      .then(loginUrl => {
+        const access_token = getHashParam("access_token");
+        this.setState({ access_token, loginUrl });
 
-    if (access_token) {
-      this.getUser(access_token);
-    }
+        if (access_token) {
+          this.getUser(access_token);
+        }
+      })
+      .catch(err => console.error(err));
   }
 
   getPlaylists = () => {
@@ -82,7 +82,7 @@ class Page extends React.Component {
   render() {
     const { loading, playlists, user } = this.state;
     const isLoggedIn = this.state.access_token;
-    const loginUrl = this.props.loginUrl;
+    const loginUrl = this.state.loginUrl;
 
     if (!isLoggedIn) {
       return (

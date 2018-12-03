@@ -28,24 +28,9 @@ export function getHashParam(name) {
 }
 
 export function getSpotifyLoginURL() {
-  const scopes = [
-    "user-read-private",
-    "user-read-email",
-    "playlist-read-private",
-    "playlist-read-collaborative"
-  ];
-  const state = generateRandomString(16);
-
-  return (
-    "https://accounts.spotify.com/authorize?" +
-    querystring.stringify({
-      response_type: "token",
-      client_id: "7cda84722c9f4ec495d30859dcefbf00",
-      scope: scopes.join(" "),
-      redirect_uri: "http://localhost:3000",
-      state: state
-    })
-  );
+  return fetch("/get_spotify_uri")
+    .then(response => response.json())
+    .then(json => json.spotify_uri);
 }
 
 function generateRandomString(length) {
