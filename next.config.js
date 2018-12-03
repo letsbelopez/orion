@@ -1,6 +1,7 @@
-const nextEnv = require("next-env");
-const dotenvLoad = require("dotenv-load");
-const withCSS = require("@zeit/next-css");
+// next.config.js
+const nextEnv = require("next-env"),
+  dotenvLoad = require("dotenv-load"),
+  withCSS = require("@zeit/next-css");
 
 // load & use dotenv
 dotenvLoad();

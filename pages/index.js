@@ -6,8 +6,6 @@ import {
   getHashParam
 } from "../SpotifyHelper";
 
-import "../styles/styles.css";
-
 class Page extends React.Component {
   state = {
     access_token: false,
