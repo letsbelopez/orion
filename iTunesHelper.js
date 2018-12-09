@@ -6,3 +6,7 @@ export function searchByTerm(query) {
     `https://itunes.apple.com/search?term=${term}&media=music&limit=10`
   );
 }
+
+export function createiTunesLink(link) {
+  return `${link.replace("https", "itunes")}&app=itunes`;
+}
