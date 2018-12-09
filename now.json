@@ -1,7 +1,0 @@
-{
-  "version": 1,
-  "alias": "orion-spotify",
-  "env": {
-    "REDIRECT_URI": "https://orion-spotify.now.sh"
-  }
-}
