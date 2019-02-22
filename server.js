@@ -33,6 +33,7 @@ app.prepare().then(() => {
     const spotify_uri =
       "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
+        show_dialog: true,
         response_type: "token",
         client_id: CLIENT_ID,
         scope: scopes.join(" "),

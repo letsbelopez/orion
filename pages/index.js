@@ -100,6 +100,11 @@ class Page extends React.Component {
 
     return (
       <div>
+        <nav>
+          <Link href={loginUrl}>
+            <a>Logout</a>
+          </Link>
+        </nav>
         <ul>
           <li>
             <p>Welcome {user.display_name}</p>
