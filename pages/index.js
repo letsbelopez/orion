@@ -84,13 +84,19 @@ class Page extends React.Component {
     const isLoggedIn = this.state.access_token;
     const loginUrl = this.state.loginUrl;
 
+    // Log in screen
     if (!isLoggedIn) {
       return (
-        <nav>
-          <Link href={loginUrl}>
-            <a>Login first</a>
-          </Link>
-        </nav>
+        <div className="flex justify-center items-center h-screen bg-black">
+          <div className="bg-grey-darkest shadow-md rounded px-8 pt-6 pb-8 mb-4 flex items-center justify-center flex-col">
+            <h1 className="text-2xl text-white mb-6">Log in to Spotify</h1>
+            <Link href={loginUrl}>
+              <a className="no-underline bg-green hover:bg-green-light text-white font-bold py-2 px-4 border-b-4 border-green-dark hover:border-green rounded">
+                LOG IN
+              </a>
+            </Link>
+          </div>
+        </div>
       );
     }
 
@@ -98,19 +104,31 @@ class Page extends React.Component {
       return <p>Loading...</p>;
     }
 
+    // Dashboard
     return (
-      <div>
-        <nav>
-          <Link href={loginUrl}>
-            <a>Logout</a>
-          </Link>
+      <div className="">
+        <nav className="bg-black p-6 border-b-1 border-grey-dark shadow">
+          <ul className="list-reset flex justify-between">
+            <li>
+              <h1 className="text-white">Welcome {user.display_name}</h1>
+            </li>
+            <li className="mr-6">
+              <Link href={loginUrl}>
+                <a className="inline-block no-underline bg-green hover:bg-green-light text-white font-bold py-2 px-4 border-b-4 border-green-dark hover:border-green rounded uppercase">
+                  Logout
+                </a>
+              </Link>
+            </li>
+          </ul>
         </nav>
-        <ul>
+        <div />
+        <ul className="list-reset">
           <li>
-            <p>Welcome {user.display_name}</p>
-          </li>
-          <li>
-            <button onClick={this.getPlaylists} disabled={!isLoggedIn}>
+            <button
+              className="bg-green hover:bg-green-light text-white font-bold py-2 px-4 border-b-4 border-green-dark hover:border-green rounded"
+              onClick={this.getPlaylists}
+              disabled={!isLoggedIn}
+            >
               Get your playlists
             </button>
           </li>
