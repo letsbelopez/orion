@@ -5,6 +5,7 @@ import {
   getSpotifyLoginURL,
   getHashParam
 } from "../SpotifyHelper";
+import MainNavigation from "../components/mainNavigation";
 
 class Page extends React.Component {
   state = {
@@ -21,8 +22,10 @@ class Page extends React.Component {
         const access_token = getHashParam("access_token");
         this.setState({ access_token, loginUrl });
 
+        // returning from spotify auth
         if (access_token) {
           this.getUser(access_token);
+          this.getPlaylists();
         }
       })
       .catch(err => console.error(err));
@@ -54,11 +57,11 @@ class Page extends React.Component {
   renderPlaylists = () => {
     return (
       <React.Fragment>
-        <h2>Playlists</h2>
-        <ul>
+        <h3 className="mb-1 text-white text-xs">PLAYLISTS</h3>
+        <ul className="list-reset">
           {this.state.playlists.items.map(playlist => {
             return (
-              <li key={playlist.id}>
+              <li className="mb-2 hover:bg-grey-darkest" key={playlist.id}>
                 <Link
                   href={{
                     pathname: "/playlist",
@@ -69,7 +72,9 @@ class Page extends React.Component {
                     }
                   }}
                 >
-                  <a>{playlist.name}</a>
+                  <a className="text-grey-light text-sm no-underline hover:text-white">
+                    {playlist.name}
+                  </a>
                 </Link>
               </li>
             );
@@ -100,40 +105,21 @@ class Page extends React.Component {
       );
     }
 
+    // Loading screen
     if (loading) {
       return <p>Loading...</p>;
     }
 
     // Dashboard
     return (
-      <div className="">
-        <nav className="bg-black p-6 border-b-1 border-grey-dark shadow">
-          <ul className="list-reset flex justify-between">
-            <li>
-              <h1 className="text-white">Welcome {user.display_name}</h1>
-            </li>
-            <li className="mr-6">
-              <Link href={loginUrl}>
-                <a className="inline-block no-underline bg-green hover:bg-green-light text-white font-bold py-2 px-4 border-b-4 border-green-dark hover:border-green rounded uppercase">
-                  Logout
-                </a>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        <div />
-        <ul className="list-reset">
-          <li>
-            <button
-              className="bg-green hover:bg-green-light text-white font-bold py-2 px-4 border-b-4 border-green-dark hover:border-green rounded"
-              onClick={this.getPlaylists}
-              disabled={!isLoggedIn}
-            >
-              Get your playlists
-            </button>
-          </li>
-        </ul>
-        <div>{playlists && this.renderPlaylists()}</div>
+      <div className="h-screen">
+        <MainNavigation loginUrl={loginUrl} displayName={user.display_name} />
+        <main className="flex h-full">
+          <div className="bg-grey-darkest p-6 h-max">
+            {playlists && this.renderPlaylists()}
+          </div>
+          <div />
+        </main>
       </div>
     );
   }
